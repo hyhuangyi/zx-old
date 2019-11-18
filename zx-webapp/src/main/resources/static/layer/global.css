@@ -1,0 +1,26 @@
+@charset "utf-8";
+
+/*========================================
+ 描述：系统HTML标签重置样式
+ 作者：丁伟 2013.10.23
+ 修改：
+========================================*/
+html, body, iframe, form, th, td, h1, h2, h3, h4, h5, h6, hr, p, dl, dt, dd, ul, ol, li, input, textarea, button, select { margin:0; padding:0; }
+
+table { border-collapse:collapse; border-spacing:0; }
+
+h1, h2, h3, h4, h5, h6 { font-size:100%; font-weight:400; }
+
+ul, ol { list-style:none; }
+
+input, button { outline:none; }
+
+input, textarea, button, select { font-size:100%; font-family:'microsoft yahei'; }
+
+img { -ms-interpolation-mode:bicubic; border:0; vertical-align:middle; }
+
+a { cursor:pointer; text-decoration:none; }
+
+a:hover { text-decoration:underline; }
+
+i, em { font-style:normal; }

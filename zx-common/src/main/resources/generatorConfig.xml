@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--引入generator.properties配置-->
+    <properties resource="generator.properties"/>
+    <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 为模型生成序列化方法-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!-- 为生成的Java模型创建一个toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <commentGenerator type="cn.common.pojo.CommentGenerator">
+            <!-- 是否去除自动生成的注释 true：是 false:否 -->
+            <property name="suppressAllComments" value="true"/>
+            <!-- 是否禁止显示日期 true：是 false:否 -->
+            <property name="suppressDate" value="true"/>
+             <!--是否添加字段注释 true:是 false：否-->
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+
+        <!--数据库连接信息-->
+        <jdbcConnection driverClass="${jdbc.driverClass}"
+                        connectionURL="${jdbc.connectionURL}"
+                        userId="${jdbc.userId}"
+                        password="${jdbc.password}">
+        </jdbcConnection>
+        <!--targetProject 生成的地址 targetPackage生成包名-->
+        <!--生成实体类-->
+        <javaModelGenerator targetPackage="${package.model}" targetProject="${export.path}"/>
+        <!--生成sql-->
+        <sqlMapGenerator targetPackage="${package.sql}" targetProject="${export.path}"/>
+        <!--生成mapper(dao)-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${package.dao}" targetProject="${export.path}"/>
+
+        <!--生成全部表tableName设为%-->
+        <!--默认会添加example的示例代码 全设为false-->
+        <table tableName="%" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <!--自增长ID 的获取-->
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>

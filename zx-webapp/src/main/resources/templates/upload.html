@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>上传文件</title>
+    <link rel="icon" th:href="@{/img/city.ico}" type="image/x-icon"/>
+    <style>
+    .btn{
+    padding: 5px 10px;
+    background: #00b0f0;
+    color: #FFF;
+    border: none;
+    border-radius: 5px;
+    }
+    </style>
+</head>
+<body>
+<h1>
+    Spring Boot file upload example
+</h1>
+
+<form method="POST" th:action="@{/comm/upload}" enctype="multipart/form-data">
+
+    <input class="btn" type="file" name="file"/><br/><br/>
+
+    <input class="btn" type="submit" value="上传文件"/>
+
+</form>
+</body>
+</html>

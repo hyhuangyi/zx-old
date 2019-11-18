@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.common.dao.mapper.SysTreeDictMapper">
+
+  <resultMap id="BaseResultMap" type="cn.common.entity.SysTreeDict">
+    <id column="DD_ID" jdbcType="INTEGER" property="ddId" />
+    <result column="DD_ITEM" jdbcType="VARCHAR" property="ddItem" />
+    <result column="DD_TEXT" jdbcType="VARCHAR" property="ddText" />
+    <result column="DD_VALUE" jdbcType="VARCHAR" property="ddValue" />
+    <result column="DD_INDEX" jdbcType="INTEGER" property="ddIndex" />
+    <result column="PARENT_VALUE" jdbcType="VARCHAR" property="parentValue" />
+    <result column="UPDATE_USER" jdbcType="INTEGER" property="updateUser" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="ISDEL" jdbcType="BIT" property="isdel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    DD_ID, DD_ITEM, DD_TEXT, DD_VALUE, DD_INDEX, PARENT_VALUE, UPDATE_USER, UPDATE_DATE, 
+    ISDEL
+  </sql>
+  <resultMap id="DictDTO" type="cn.common.entity.DictDTO">
+    <result column="DD_ITEM" jdbcType="VARCHAR" property="ddItem"/>
+    <result column="DD_TEXT" jdbcType="VARCHAR" property="ddText"/>
+    <result column="DD_VALUE" jdbcType="VARCHAR" property="ddValue"/>
+    <result column="DD_INDEX" jdbcType="INTEGER" property="index"/>
+    <result column="PARENT_VALUE" jdbcType="VARCHAR" property="parentValue"/>
+  </resultMap>
+  <select id="listDictsByCode" parameterType="java.lang.String" resultMap="DictDTO">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_tree_dict
+    where DD_ITEM = #{code,jdbcType=VARCHAR}  AND DD_VALUE !=-999 AND ISDEL=0
+    ORDER BY DD_INDEX
+  </select>
+
+  <select id="listSubDicts"  resultMap="DictDTO">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_tree_dict
+    where DD_ITEM = #{ddItem,jdbcType=VARCHAR}  AND PARENT_VALUE =#{ddValue,jdbcType=VARCHAR}  AND ISDEL=FALSE
+  </select>
+
+</mapper>

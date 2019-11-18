@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.common.dao.mapper.ExcuteTimeDao">
+    <insert id="insert" parameterType="cn.common.entity.SysExcuteTimeLog">
+        insert into sys_excute_time_log(id, excute_time, excute_method, create_date, update_date, operate_time)
+        VALUES(#{id,jdbcType=INTEGER},#{excuteTime,jdbcType=INTEGER},#{excuteMethod,jdbcType=VARCHAR},
+        #{createDate,jdbcType=TIMESTAMP},#{updateDate,jdbcType=TIMESTAMP},#{operateDate,jdbcType=TIMESTAMP})
+    </insert>
+
+</mapper>

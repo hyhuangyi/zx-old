@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      
+<link th:href="@{/css/login.css}" rel="stylesheet" /> 
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+<link rel="icon" th:href="@{/img/city.ico}" type="image/x-icon"/>
+<script th:src="@{/js/jquery-2.1.4.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/login.js}"></script>
+
+
+<!-- 鼠标移动，冒出泡泡效果 -->
+
+<script type="text/javascript" th:src="@{/js/sketch.min.js}"></script>
+<script>
+setInterval("time.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
+</script>
+
+
+<style>
+body{
+background-image:url(../img/background-img/1.jpg);
+
+}
+
+#main{
+position:fixed;
+top:0px;
+z-index:20;
+}
+ #change_bg_div{
+		position:absolute; 
+		width:254px;
+		height:120px;
+		right:10px;
+		top:100px;
+		z-index:20;
+		border:1px dashed #CCC;
+		color:#FFF;
+} 
+#inner{
+margin-left:20px;
+margin-top:45px;
+}
+</style>
+
+
+<head>
+<meta charset="UTF-8" />
+<title>login</title>
+</head>
+<body>
+<div id="main" >
+<input id="register_in" type="hidden" th:value="${register_success}" /> 
+
+<!-- 更改登录背景 -->
+<div id="change_bg_div">
+<div class="form-group" id="inner">
+<label>更改登录背景</label>
+<select style="width:120px;height:30px;color:#0CF; text-align:center" id="change_bg">
+<option value="1"></option>
+<option value="7">星空背景1</option>
+<option value="1">星空背景2</option>
+<option value="1">------------------</option>
+<option value="4">大海背景1</option>
+<option value="5">大海背景2</option>
+<option value="1">------------------</option>
+<option value="1">恢复默认</option>
+<option value="1">------------------</option>
+</select>
+</div>
+</div>
+
+
+
+
+<div id="login_div">                  
+<div id="login">
+<div id="login_top"><strong>用户登录</strong></div>
+<div id="apart1"></div>
+
+
+<form class="m-t" role="form" id="login_form"  th:action="@{/comm/login}" method="post" th:object="${user}" >
+ <div id="user_area">
+<div id="username">
+<div  class="form-group has-feedback">
+<span><strong>Username：</strong></span>
+<span class="glyphicon glyphicon-user form-control-feedback"></span>
+<input size="28" id="in" th:field="*{username}"  required=""  placeholder="账号/手机/邮箱" />
+</div>
+</div>
+</div> 
+
+
+
+
+<div id="apart2"></div>
+
+<div id="pwd_area">
+<div id="password">
+<div  class="form-group has-feedback">
+<span><strong>Password：</strong></span>
+<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+<input size="28"  type="password" th:field="*{password}"  required=""  id="pwd_in"  placeholder="密码" />
+</div>
+</div>
+</div>
+</form>
+<div id="apart3"></div>
+
+
+<div id="checkBox_area">
+<div id="checkBox">
+<div class="form-group" style="height:30px;">
+
+<div id="reb_pwd">
+<input type="checkbox" />  记住密码
+</div>
+
+<div id="auto_login"><input type="checkbox" />  自动登录</div>
+</div>
+</div>
+</div>
+
+<span th:text="${error}" style="padding-left:12.5px;color:red"></span>
+
+<div id="apart4"></div>
+<div id="login_area"  style="border:1px solid #0CF;">
+<div id="login_now">
+<div class="form-group" id="login_btn_father" style="color:#0CF;" ><span><a href="#" style="text-decoration:none"  id="login_a" class="login">登录</a></span></div>
+</div>
+</div>
+
+<div id="apart5"></div>
+
+<div id="footer"><a style="text-decoration:none" th:href="@{/comm/toRegister}">账号注册</a> | <a style="text-decoration:none" href="#" id="forget">忘记密码</a></div>
+
+<div id="apart6"></div>
+
+<div id="time"></div>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+#login{
+	background-color:#FFF;
+	position:absolute;
+	}
+#login_top{
+	border:none;
+	background-color:#0CF;
+	text-align:center;
+	color:#FFF;
+	font-size:18px;
+	}
+#apart1,#apart2,#apart3,#apart4,#apart5{
+	border:none;
+	background-color:#FFF;
+	}
+#user_area,#pwd_area,#login_area{
+	border:1px solid #CCC;
+	text-align:center;
+	}
+#in,#pwd_in{
+	border:none;
+	}
+#username,#password,#login_now{border:none;}
+#reb_pwd{
+	border:none;
+	float:left; 
+	ext-align:center; 
+	color:#999;
+	}
+#auto_login{
+	border:none;
+	float:right; 
+	text-align:center;
+	color:#999;
+	}
+
+#footer{
+	text-align:center;
+	color:#0CF;
+	}
+#time{
+	text-align:center;
+	color:#FFF; 
+	background-color:#0CF;
+	}
+
+ a:link{
+	text-decoration:none;
+	color:#0CF;
+	}
+ a:visited{
+	text-decoration:none;
+	color:#0CF;
+	}
+a:hover{
+	text-decoration:none;
+	color:#0FF;
+	}
+a:active{
+	text-decoration:none;
+	color:#C09;
+	}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+<meta charset="utf-8" />
+<title>Rigister</title>
+
+<script th:src="@{/js/jquery-2.1.1.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<link rel="icon" th:href="@{/img/city.ico}" type="image/x-icon"/>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+<link type="text/css" rel="stylesheet"  th:href="@{/css/Rigister.css}" />
+<script type="text/javascript"  th:src="@{/js/Rigister.js}"></script>
+
+<!-- 鼠标移动，冒出泡泡效果 -->
+ <script type="text/javascript" th:src="@{/js/sketch.min.js}"></script>
+
+</head>
+
+<body >
+<div id="main">
+<div id="father">
+<div id="son">
+  <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="FlashID" title="fish">
+    <param name="movie" th:value="@{../swf/fish.swf}"  />
+    <param name="quality" value="high" />
+    <param name="wmode" value="opaque" />
+    <param name="swfversion" value="6.0.65.0" />
+    <!-- 此 param 标签提示使用 Flash Player 6.0 r65 和更高版本的用户下载最新版本的 Flash Player。如果您不想让用户看到该提示，请将其删除。 -->
+    <param name="expressinstall" value="Scripts/expressInstall.swf" />
+    <!-- 下一个对象标签用于非 IE 浏览器。所以使用 IECC 将其从 IE 隐藏。 -->
+    <!--[if !IE]>-->
+    <object type="application/x-shockwave-flash" id="fish02" th:data="@{../swf/fish.swf}" >
+      <!--<![endif]-->
+      <param name="quality" value="high" />
+      <param name="wmode" value="opaque" />
+      <param name="swfversion" value="6.0.65.0" />
+      <param name="expressinstall" value="Scripts/expressInstall.swf" />
+      <!-- 浏览器将以下替代内容显示给使用 Flash Player 6.0 和更低版本的用户。 -->
+      <div>
+        <h4>此页面上的内容需要较新版本的 Adobe Flash Player。</h4>
+        <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="获取 Adobe Flash Player" width="112" height="33" /></a></p>
+      </div>
+      <!--[if !IE]>-->
+    </object>
+    <!--<![endif]-->
+  </object>
+</div>
+
+</div>
+<div id="top">
+
+<div id="mess"><h3>用户注册中心</h3></div>
+
+
+</div>
+
+<div  id="content">
+<div id="apart0"></div>
+ <div id="bg_color">
+    <span id="c1" ></span>
+    <span id="c2" ></span>
+    <span id="c3" ></span>
+    <span id="c4"></span>
+    <span id="c5" ></span>
+    <span id="select">选择颜色：</span></div>
+
+<div id="apart1"></div>
+
+
+<div id="fill_in">
+
+
+ <form class="m-t form-horizontal" id="register_form" role="form" 
+       th:action="@{/comm/register}" method="post" th:object="${user}">
+<br />
+<div class="form-group">
+<label for="Phone" class=" col-sm-2 control-label">手机：</label>
+<div class="col-sm-7">
+<input id="Phone"  th:field="*{phone}"  type="text" class="form-control list-inline" style="color:#999;"  />
+</div>
+<span id="phoneSpan"></span>
+</div><br />
+
+
+<div class="form-group">
+<label for="email" class=" col-sm-2  control-label">邮箱：</label>
+<div class="col-sm-7">
+<input id="email"  th:field="*{email}"  type="text" class="form-control list-inline"  style="color:#999;"  />
+</div>
+<span id="emailSpan"></span>
+</div><br />
+
+<div class="form-group">
+<label for="username" class="col-sm-2 control-label">账号：</label>
+<div class="col-sm-7">
+<input id="username"  th:field="*{username}" type="text" class="form-control list-inline" />
+</div>
+<span id="usernameSpan"></span>
+</div><br />
+
+<div class="form-group">
+<label for="password" class="col-sm-2 control-label">密码：</label>
+<div class="col-sm-7">
+<input id="password"  th:field="*{password}" type="password" class="form-control list-inline" />
+</div>
+<span id="passwordSpan"></span>
+</div><br />
+
+
+<div class="form-group">
+<label for="passwordConfirm" class="col-sm-2 control-label">校验：</label>
+<div class="col-sm-7">
+<input id="passwordConfirm" type="password" class="form-control list-inline" />
+</div>
+<span id="passwordConfirmSpan"></span>
+</div>
+
+<div id="apart2" style="width:700px ; border:none;height:60px;"></div>
+
+<div id="register"><a id="regist" href="#">注册</a></div>
+
+<div id="apart3" style="width:700px ; border:none;height:40px;"></div>
+
+<div id="login_"><a id="log_" th:href="@{/comm/toLogin}">登录</a></div>
+
+<div id="apart4" style="width:700px ; border:none;height:20px;"></div>
+</form>
+</div>
+
+
+
+
+</div>
+
+
+
+<div id="footer">
+<p>版权@&nbsp;Demonor所有, From Guangdong Polytechnic Institute </p>
+</div>
+
+<div id="audio">
+
+<audio th:loop="-1" th:controls="controls" th:autoplay="autoplay " th:preload ="load" th:align="center">
+<!-- 为了兼容性强一点，在这里设置同一首歌的多种后缀格式 -->
+<source th:src="@{../audio/卫兰 - My Love My Fate Ring.mp3}" />
+<source th:src="@{../audio/卫兰 - My Love My Fate Ring.ogg}" />
+<source th:src="@{../audio/卫兰 - My Love My Fate Ring.wav}" />
+</audio>
+
+<audio th:loop="-1" th:controls="controls"  th:preload ="load"  th:align="center">
+<source th:src="@{../audio/Alan Walker - Fade.mp3}" />
+<source th:src="@{../audio/Alan Walker - Fade.ogg}" />
+<source th:src="@{../audio/Alan Walker - Fade.wav}" />
+</audio>
+</div> 
+</div>
+
+</body>
+</html>

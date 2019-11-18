@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--*******************************************属性配置********************************************************-->
+    <!--ip解析-->
+    <conversionRule conversionWord="ip" converterClass="cn.common.servlet.IpConvert"/>
+    <!--控制台输出样式 magenta:洋红 boldMagenta:粗红 cyan:青色  ︻$════>   ︻⊱═════>-->
+    <property name="CONSOLE_LOG_PATTERN" value="%boldMagenta([%d{yyyy-MM-dd HH:mm:ss.SSS}]) %green([%ip]) %cyan([%X{requestId}]) %boldMagenta(%-5level) %blue(%logger{15}) %red([%thread])   %magenta(︻⊱═════>) %cyan(%msg%n)"/>
+    <!--文件输出样式-->
+    <property name="FILE_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%ip] [%X{requestId}] %-5level %logger{20} [%thread] - %msg%n"></property>
+    <!-- 日志文件的存储地址 -->
+    <property name="LOG_HOME" value="/home/zx/log"/>
+
+
+    <!--*******************************************输出到控制台配置********************************************************-->
+    <!--写入日志到控制台的appender,以java -jar xx.jar 启动会乱码 需要去掉 charset-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <!--<charset>UTF-8</charset>&lt;!&ndash; 此处设置字符集 &ndash;&gt;-->
+        </encoder>
+    </appender>
+
+
+    <!--*******************************************INFO 配置********************************************************-->
+    <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 此日志文档只记录info级别的 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>                     <!--设置拦截的对象为INFO级别日志 -->
+            <onMatch>ACCEPT</onMatch>               <!-- 当遇到了info级别时,启用改段配置. -->
+            <onMismatch>DENY</onMismatch>           <!-- 没有遇到info级别日志时,屏蔽改段配置 -->
+        </filter>
+
+        <File>${LOG_HOME}/zx-parent/zx-info.log</File>
+
+        <!-- 日志记录器的滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${LOG_HOME}/zx-parent/info/zx-info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!--日志文档保留天数 -->
+            <maxHistory>10</maxHistory>
+            <!--单个文件超过MaxFileSize时多生成一个log文件-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <!-- 格式化输出 -->
+        <encoder charset="UTF-8" class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${FILE_PATTERN}</pattern>
+            <!-- 此处设置字符集 -->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+
+    <!--*******************************************DEBUG 配置********************************************************-->
+    <!--写入DEBUG日志到文件的appender -->
+    <appender name="DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 此日志文档只记录DEBUG级别的 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+
+        <File>${LOG_HOME}/zx-parent/zx-debug.log</File>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/zx-parent/debug/zx-debug.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!-- 格式化输出 -->
+        <encoder charset="UTF-8" class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${FILE_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+
+    <!--*******************************************WARN 配置********************************************************-->
+    <appender name="WARN_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 此日志文档只记录WARN级别的 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+
+        <File>${LOG_HOME}/zx-parent/zx-warn.log</File>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/zx-parent/warn/zx-warn.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <!-- 格式化输出 -->
+        <encoder charset="UTF-8" class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${FILE_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+
+    <!--*******************************************ERROR 配置********************************************************-->
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 此日志文档只记录ERROR级别的 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+
+        <File>${LOG_HOME}/zx-parent/zx-error.log</File>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/zx-parent/error/zx-error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <!-- 格式化输出 -->
+        <encoder charset="UTF-8" class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${FILE_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+   <!--*******************************************环境配置********************************************************-->
+    <!--生产环境:打印控制台和输出到文件 -->
+    <springProfile name="prod">
+        <root level="info">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ERROR_FILE"/>
+            <appender-ref ref="INFO_FILE"/>
+        </root>
+    </springProfile>
+
+    <!--开发环境:打印控制台和输出到文件 -->
+    <springProfile name="dev">
+        <!--日志级别 debug<info<warn<Error<Fatal 设置info debug日志就不会打印-->
+        <root level="info">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="DEBUG_FILE"/>
+            <appender-ref ref="INFO_FILE"/>
+            <appender-ref ref="WARN_FILE"/>
+            <appender-ref ref="ERROR_FILE"/>
+        </root>
+    </springProfile>
+</configuration>

@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	  xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<style type="text/css">
+		body, html{width: 100%;height: 100%; margin:0;font-family:"微软雅黑";}
+		#l-map{height:300px;width:100%;}
+		#r-result{width:100%;}
+	</style>
+	<link rel="icon" th:href="@{/img/city.ico}" type="image/x-icon"/>
+	<script type="text/javascript" th:src="@{https://api.map.baidu.com/getscript?v=2.0&amp;ak=PNhhMFEMvIgiZ8LO09zFNeBd3pHtnM7r&amp;services=&amp;t=20180917142401}"></script>
+	<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+	<title>百度地图</title>
+</head>
+<body>
+	<div id="jiansuo" style="height:50px;width:650px;margin: 0 auto;">
+		<input style="height:30px;width:550px;margin: 0 auto;" id="suggestId" type="text" placeholder="请输入地点" required="required" autocomplete="off" />
+	</div>
+	<div id="l-map" style="height:500px;width:650px;margin: 0 auto;"></div>
+	<div id="r-result"></div>
+	
+</body>
+
+
+<script type="text/javascript">
+	// 百度地图API功能
+	var map = new BMap.Map("l-map");            // 创建Map实例
+	map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
+	var local = new BMap.LocalSearch(map, {
+		renderOptions: {map: map, panel: "r-result"}
+	});
+	$('#suggestId').keyup(function(){
+	 
+	 local.search($(this).val());
+	});
+</script>
+
+</html>

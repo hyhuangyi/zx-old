@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>城市列表</title>
+    <link rel="icon" th:href="@{/img/city.ico}" type="image/x-icon"/>
+    <style>
+        table.dataintable {
+            margin-top:15px;
+            border-collapse:collapse;
+            border:1px solid #aaa;
+            width:100%;
+        }
+        table.dataintable th {
+            vertical-align:baseline;
+            padding:5px 15px 5px 6px;
+            background-color:#3F3F3F;
+            border:1px solid #3F3F3F;
+            text-align:left;
+            color:#fff;
+        }
+        table.dataintable td {
+            vertical-align:text-top;
+            padding:6px 15px 6px 6px;
+            border:1px solid #aaa;
+        }
+        table.dataintable tr:nth-child(odd) {
+            background-color:#F5F5F5;
+        }
+        table.dataintable tr:nth-child(even) {
+            background-color:#fff;
+        }
+    </style>
+</head>
+<body>
+
+<input id="page" type="hidden"  th:value="${page}"/>
+<table id="hy" class="dataintable">
+    <thead>
+    <tr >
+        <th>城市代码</th>
+        <th>城市全名称</th>
+        <th>城市简称</th>
+        <th>城市拼音</th>
+        <th>城市省代码</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="collect : ${city}" >
+        <td th:text="${collect.code}"></td>
+        <td th:text="${collect.fullName}"></td>
+        <td th:text="${collect.shortName}"></td>
+        <td th:text="${collect.py}"></td>
+        <td th:text="${collect.provCode}"></td>
+    </tr>
+    </tbody>
+</table>
+<br/>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a th:href="@{/comm/getCityListPage(pageNum=${page}-1)}">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ <span th:text="${page}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a th:href="@{/comm/getCityListPage(pageNum=${page}+1)}">下一页</a>
+<script>
+
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+
+
+       ${AnsiColor.BRIGHT_MAGENTA}
+                                                                                                          ,d
+                                                                                                          88
+                  888888888 8b,     ,d8         8b,dPPYba,  ,adPPYYba, 8b,dPPYba,  ,adPPYba, 8b,dPPYba, MM88MMM
+                       a8P"  `Y8, ,8P' aaaaaaaa 88P'    "8a ""     `Y8 88P'   "Y8 a8P_____88 88P'   `"8a  88
+                    ,d8P'      )888(   """""""" 88       d8 ,adPPPPP88 88         8PP""""""" 88       88  88
+                  ,d8"       ,d8" "8b,          88b,   ,a8" 88,    ,88 88         "8b,   ,aa 88       88  88,
+                  888888888 8P'     `Y8         88`YbbdP"'  `"8bbdP"Y8 88          `"Ybbd8"' 88       88  "Y888
+                                                88
+                                                88
+
+
+                                ${AnsiColor.BRIGHT_YELLOW}
+                                                       ${AnsiColor.BRIGHT_RED}_ooOoo_${AnsiColor.BRIGHT_YELLOW}
+                                                      ${AnsiColor.BRIGHT_RED}o8888888o${AnsiColor.BRIGHT_YELLOW}
+                                                      ${AnsiColor.BRIGHT_RED}88${AnsiColor.BRIGHT_YELLOW}" . "${AnsiColor.BRIGHT_RED}88${AnsiColor.BRIGHT_YELLOW}
+                                                      (| -_- |)
+                                                      O\  =  /O
+                                                   ____/`---'\____
+                                                 .'  \\|     |//  `.
+                                                /  \\|||  :  |||//  \
+                                               /  _||||| -:- |||||-  \
+                                               |   | \\\  -  /// |   |
+                                               | \_|  ''\---/''  |   |
+                                               \  .-\__  `-`  ___/-. /
+                                             ___`. .'  /--.--\  `. . __
+                                          ."" '<  `.___\_<|>_/___.'  >'"".
+                                         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+                                         \  \ `-.   \_ __\ /__ _/   .-` /  /
+                                    ======`-.____`-.___\_____/___.-`____.-'======
+                                                       `=---='
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                           ${AnsiColor.BRIGHT_RED}                     佛祖保佑       永无BUG

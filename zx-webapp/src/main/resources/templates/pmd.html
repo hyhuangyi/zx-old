@@ -1,0 +1,75 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	  xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+	  xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+    <meta charset="UTF-8" />
+    <title>跑马灯</title>
+	<link rel="icon" th:href="@{/img/city.ico}" type="image/x-icon"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+	<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+	<style>
+		#content{
+			width:40%;
+			height:300px;
+			margin:0 auto;
+			text-align:center;   /* 水平居中 */
+			line-height: 300px;  /* 垂直剧终 */
+			background-color:lightblue;
+			font-size:35px;
+			white-space:nowrap;/*不自动换行*/
+			overflow: hidden;/*将超出的部分直接隐藏*/
+			color: red;
+		}
+	
+	</style>
+</head>
+
+<body>
+		<div id='content'>菩提本无树，明镜亦非台。本来无一物，何处惹尘埃。</div>
+		
+		<div>
+		<p style="width:60%;height:30px;line-height: 30px;margin:10px auto;background-color:blueviolet;text-align:center;" >
+		<input type="button" id="bt1" value="开始" title="开始" />
+		
+		<input type="button" id="bt2" value= "  停  " title="停 "/>
+		</p>
+		</div>
+</body>
+<script>
+
+  var bool=false;
+	$('#bt1').click(function(){
+	  bool=false;
+	   hy();
+	   $('#bt1').attr("disabled","disabled");
+	});
+   
+   function hy(){
+  
+	    if(bool) return;
+		pmd();
+		setTimeout("hy()",500);
+   }
+	
+	function pmd(){
+		var v=$('#content').html();
+		var len=v.length;
+		var start=v.substring(0,1);
+		var end=v.substr(1);
+		var newStr=end+start;
+		$('#content').html(newStr);
+	}
+	
+	$('#bt2').click(function(){
+		bool=true;
+		$('#bt1').removeAttr("disabled");;
+	});
+</script>
+
+
+</html>

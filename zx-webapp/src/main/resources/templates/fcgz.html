@@ -1,0 +1,240 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultrag.net.nz/thymeleaf/layout"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+    <meta charset="UTF-8"/>
+    <title>房产估值</title>
+    <link rel="icon" th:href="@{/img/city.ico}" type="image/x-icon"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+    <style>
+        #allmap {
+            width: 80%;
+            height: 8.8rem;
+            margin: 0 auto;
+        }
+
+        .house-result {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        p {
+            margin-left: 5px;
+            font-size: 14px;
+        }
+
+        body {
+            font-size: 0.14rem; /*实际相当于14px*/
+        }
+
+        body, * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .form-top {
+            margin-top: 15px;
+            font-size: 0.35rem;
+        }
+
+        .headDiv {
+            background: #109add;
+            text-align: center;
+            line-height: 1.6rem;
+            vertical-align: middle;
+        }
+
+        .headDiv label {
+            font-size: 0.6rem;
+            color: #FFF;
+        }
+
+        .input-title {
+            float: left;
+            text-align: right;
+            width: 3rem;
+        }
+
+        .phoneI {
+            font-size: 0.42rem;
+            color: #f02b2b;
+            padding-right: 5px;
+        }
+
+        .weui-cell .input-title, .weui-cell input, .weui-cell select, .weui-cell textarea {
+            padding: 0 0.1rem;
+            height: 1rem;
+            line-height: 1rem;
+        }
+
+        .weui-cell textarea {
+            height: 2rem;
+            line-height: 0.6rem;
+        }
+
+        .weui-cell__bd select, .MultipleSelect input {
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            background: url('../img/select.png') no-repeat 6rem 0.4rem;
+            background-size: auto 30%;
+        }
+
+        .weui-btn-blue {
+            background: #109add;
+        }
+
+    </style>
+    <!-- head 中 -->
+    <link rel="stylesheet" th:href="@{/css/jquery-weui.css}"/>
+    <link rel="stylesheet" th:href="@{/css/weui.css}"/>
+</head>
+<body>
+<form id="form" onsubmit="return false;">
+    <div class="headDiv">
+        <input type="hidden" id="backPage" value="$!backPage"/>
+        <label>房产估值</label>
+    </div>
+
+    <div class="weui-cells_form form-top">
+
+        <div id="r-result" class="weui-search-bar weui-search-bar_focusing">
+            <form class="weui-search-bar__form">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input id="suggestId" type="text" placeholder="请输入本人名下房产所在小区" autocomplete="off"
+                           class="weui-search-bar__input"/>
+                    <a href="javascript:void(0);" onclick="clearAll()" class="weui-icon-clear"></a>
+                </div>
+            </form>
+            <div class="current-city">
+                <!---->
+                <span class="location-img"></span>
+                <span id="currentCity">杭州市</span>
+                <button id="changeCity" type="button">切换</button>
+            </div>
+        </div>
+        <ul id="xqlist" class="house-result"
+            style="width:  position:absolute; top:4.4; left:1;z-index:10000; background-color:lightblue;">
+
+        </ul>
+        <div id="allmap"></div>
+
+        <div class="weui-cell">
+            <div class="weui-cell__hd input-title">
+                <i class="phoneI">*</i>
+                <label class="phoneLab">房屋面积：</label>
+            </div>
+            <div class="weui-cell__bd Text">
+                <input class="weui-input" type="text" name="houseArea" valid="required" id="houseArea"
+                       placeholder="请输入房屋面积（平方米）"/>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__hd input-title">
+                <i class="phoneI">*</i>
+                <label class="phoneLab">房产类型：</label>
+            </div>
+            <div class="weui-cell__bd ">
+                <select class="weui-select ui-text-failed select" valid="required" id="houseType" name="houseType">
+                    <option></option>
+                    <option>商品房</option>
+                    <option>经适房</option>
+                    <option>公房</option>
+                    <option>别墅</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+</form>
+<div class="weui-btn-area nextDiv">
+    <button type="button" class="weui-btn weui-btn-blue" id="showTooltips">估值</button>
+</div>
+
+</body>
+
+<script type="text/javascript" charset="UTF-8" th:src="@{/js/jquery-1.8.3.min.js}"></script>
+<script type="text/javascript" charset="UTF-8" th:src="@{/layer/mobile/layer.js}"></script>
+<script type="text/javascript"
+        src="https://api.map.baidu.com/getscript?v=2.0&amp;ak=PNhhMFEMvIgiZ8LO09zFNeBd3pHtnM7r&amp;services=&amp;t=20180917142401"></script>
+<script type="text/javascript" charset="UTF-8" th:src="@{/js/fastclick.js}"></script>
+<script type="text/javascript" charset="UTF-8" th:src="@{/js/adaptive.js}"></script>
+<script type="text/javascript" charset="UTF-8" th:src="@{/js/fcgz.js}"></script>
+
+<script type="text/javascript">
+    var index;
+    adpative(document, window);
+    $(function () {
+        FastClick.attach(document.body);
+        $(".MultipleSelect").each(function () {
+            var items = [];
+            $(this).find('select option').each(function () {
+                var item = {};
+                item.title = $(this).text();
+                item.value = $(this).val();
+                items.push(item);
+            });
+            $(this).find('select').remove();
+            $(this).find('input').select({
+                multi: true,
+                items: items
+            });
+        });
+        // 百度地图API功能
+        var map = new BMap.Map("allmap");
+        var point = new BMap.Point(116.331398, 39.897445);
+        map.centerAndZoom(point, 12);
+
+        function myFun(result) {
+            var cityName = result.name;
+            map.setCenter(cityName);
+            $('#currentCity').html(cityName);
+        }
+
+        var myCity = new BMap.LocalCity();
+        myCity.get(myFun);
+
+    });
+
+
+    /*监听点击切换城市事件*/
+    $(document).on('click', '.ct', function () {
+        //获取选取的城市名
+        var city = $(this).text();
+        $('#currentCity').html(city);
+
+        //切换地图
+        var map = new BMap.Map("allmap");
+        var point = new BMap.Point(116.331398, 39.897445);
+        map.centerAndZoom(point, 12);
+
+        function myFun(result) {
+            map.setCenter(city);
+        }
+
+        var myCity = new BMap.LocalCity();
+        myCity.get(myFun);
+        layer.close(index);
+    });
+
+    $(document).on('click', '.xq', function () {
+        $('#suggestId').val($(this).html());
+        $('#xqlist').empty();
+        // 百度地图API功能
+        var map = new BMap.Map("allmap");
+        map.centerAndZoom($('#currentCity').html(), 12);
+        var local = new BMap.LocalSearch(map, {
+            renderOptions: {map: map}
+        });
+        //搜索标记
+        local.search($(this).html())
+    });
+
+</script>
+</html>
